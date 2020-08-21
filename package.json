@@ -11,7 +11,8 @@
     "Ledger",
     "Javascript",
     "Tendermint",
-    "Cosmos"
+    "Cosmos",
+    "Kava"
   ],
   "author": "ZondaX GmbH",
   "license": "Apache-2.0",
