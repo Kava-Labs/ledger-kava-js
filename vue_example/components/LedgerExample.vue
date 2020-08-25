@@ -1,5 +1,5 @@
 <template>
-  <div class="cosmosLedger">
+  <div class="KavaLedger">
     <input id="webusb" v-model="transportChoice" type="radio" value="WebUSB" />
     <label for="webusb">WebUSB</label>
     <input id="u2f" v-model="transportChoice" type="radio" value="U2F" />
@@ -47,13 +47,13 @@
 import TransportWebUSB from "@ledgerhq/hw-transport-webusb";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import TransportU2F from "@ledgerhq/hw-transport-u2f";
-import CosmosApp from "../../src";
+import KavaApp from "../../src";
 import { ERROR_CODE } from "../../src/common";
 
-const path = [44, 118, 5, 0, 3];
+const path = [44, 459, 5, 0, 3];
 
 export default {
-  name: "CosmosLedger",
+  name: "KavaLedger",
   props: {},
   data() {
     return {
@@ -100,7 +100,7 @@ export default {
 
       // Given a transport (U2F/HIF/WebUSB) it is possible instantiate the app
       const transport = await this.getTransport();
-      const app = new CosmosApp(transport);
+      const app = new KavaApp(transport);
 
       // now it is possible to access all commands in the app
       const response = await app.getVersion();
@@ -121,7 +121,7 @@ export default {
 
       // Given a transport (U2F/HIF/WebUSB) it is possible instantiate the app
       const transport = await this.getTransport();
-      const app = new CosmosApp(transport);
+      const app = new KavaApp(transport);
 
       // now it is possible to access all commands in the app
       const response = await app.appInfo();
@@ -138,7 +138,7 @@ export default {
 
       // Given a transport (U2F/HIF/WebUSB) it is possible instantiate the app
       const transport = await this.getTransport();
-      const app = new CosmosApp(transport);
+      const app = new KavaApp(transport);
 
       let response = await app.getVersion();
       this.log(`App Version ${response.major}.${response.minor}.${response.patch}`);
@@ -161,7 +161,7 @@ export default {
 
       // Given a transport (U2F/HIF/WebUSB) it is possible instantiate the app
       const transport = await this.getTransport();
-      const app = new CosmosApp(transport);
+      const app = new KavaApp(transport);
 
       let response = await app.getVersion();
       this.log(`App Version ${response.major}.${response.minor}.${response.patch}`);
@@ -169,7 +169,7 @@ export default {
       this.log(`Test mode: ${response.test_mode}`);
 
       // now it is possible to access all commands in the app
-      response = await app.getAddressAndPubKey(path, "cosmos");
+      response = await app.getAddressAndPubKey(path, "kava");
       if (response.return_code !== 0x9000) {
         this.log(`Error [${response.return_code}] ${response.error_message}`);
         return;
@@ -184,7 +184,7 @@ export default {
 
       // Given a transport (U2F/HIF/WebUSB) it is possible instantiate the app
       const transport = await this.getTransport();
-      const app = new CosmosApp(transport);
+      const app = new KavaApp(transport);
 
       let response = await app.getVersion();
       this.log(`App Version ${response.major}.${response.minor}.${response.patch}`);
@@ -193,7 +193,7 @@ export default {
 
       // now it is possible to access all commands in the app
       this.log("Please click in the device");
-      response = await app.showAddressAndPubKey(path, "cosmos");
+      response = await app.showAddressAndPubKey(path, "kava");
       if (response.return_code !== ERROR_CODE.NoError) {
         this.log(`Error [${response.return_code}] ${response.error_message}`);
         return;
@@ -208,7 +208,7 @@ export default {
 
       // Given a transport (U2F/HID/WebUSB) it is possible instantiate the app
       const transport = await this.getTransport();
-      const app = new CosmosApp(transport);
+      const app = new KavaApp(transport);
 
       let response = await app.getVersion();
       this.log(`App Version ${response.major}.${response.minor}.${response.patch}`);
@@ -217,7 +217,7 @@ export default {
 
       // now it is possible to access all commands in the app
       const message =
-        '{"account_number":"6571","chain_id":"cosmoshub-2","fee":{"amount":[{"amount":"5000","denom":"uatom"}],"gas":"200000"},"memo":"Delegated with Ledger from union.market","msgs":[{"type":"cosmos-sdk/MsgDelegate","value":{"amount":{"amount":"1000000","denom":"uatom"},"delegator_address":"cosmos102hty0jv2s29lyc4u0tv97z9v298e24t3vwtpl","validator_address":"cosmosvaloper1grgelyng2v6v3t8z87wu3sxgt9m5s03xfytvz7"}}],"sequence":"0"}';
+        '{"account_number":"6571","chain_id":"cosmoshub-2","fee":{"amount":[{"amount":"5000","denom":"ukava"}],"gas":"200000"},"memo":"Delegated with Ledger from union.market","msgs":[{"type":"cosmos-sdk/MsgDelegate","value":{"amount":{"amount":"1000000","denom":"ukava"},"delegator_address":"kava102hty0jv2s29lyc4u0tv97z9v298e24t3vwtpl","validator_address":"kavavaloperoper1grgelyng2v6v3t8z87wu3sxgt9m5s03xfytvz7"}}],"sequence":"0"}';
       response = await app.sign(path, message);
 
       this.log("Response received!");
