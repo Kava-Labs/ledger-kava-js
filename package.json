@@ -1,6 +1,6 @@
 {
   "name": "ledger-kava-js",
-  "version": "0.0.0",
+  "version": "2.2.0",
   "description": "Node API for Cosmos App (Ledger Nano S/X)",
   "main": "./dist/index.js",
   "repository": {
@@ -78,5 +78,8 @@
   "browserslist": [
     "> 1%",
     "last 2 versions"
-  ]
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  }
 }
